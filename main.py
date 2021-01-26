@@ -6,8 +6,6 @@ from a_star import Enviroment_a_star
 def main():
 
 
-    # List containing the data for each iteration
-    graph_list = list()
 
     T = np.zeros((12, 12, 4))
     counter = 0
