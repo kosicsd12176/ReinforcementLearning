@@ -47,22 +47,15 @@ def main():
             u1[s] = return_state_utility(v, Matrix, u, reward, gamma)
             delta = max(delta, np.abs(u1[s] - u[s]))
 
-        print("---------------- ITERATIONS ----------------")
         print(u[0:4])
         print(u[4:8])
         print(u[8:12])
         # Stopping criteria
         if delta < epsilon * (1 - gamma) / gamma:
-            print("---------------- FINAL RESULT ----------------")
-            print("Iterations: " + str(iteration))
-            print("Delta: " + str(delta))
-            print("Gamma: " + str(gamma))
-            print("Epsilon: " + str(epsilon))
-            print("----------------------------------------------")
+            print("Number ofIterations: " + str(iteration))
             print(u[0:4])
             print(u[4:8])
             print(u[8:12])
-            print("===================================================")
             break
 
 
