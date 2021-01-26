@@ -7,23 +7,23 @@ def main():
 
 
 
-    T = np.zeros((12, 12, 4))
+    Matrix = np.zeros((12, 12, 4))
     counter = 0
     for row in range(0, 3):
         for col in range(0, 4):
             line = return_transition(row, col, action="up", tot_row=3, tot_col=4)
-            T[counter, :, 0] = line.flatten()
+            Matrix[counter, :, 0] = line.flatten()
             line = return_transition(row, col, action="left", tot_row=3, tot_col=4)
-            T[counter, :, 1] = line.flatten()
+            Matrix[counter, :, 1] = line.flatten()
             line = return_transition(row, col, action="down", tot_row=3, tot_col=4)
-            T[counter, :, 2] = line.flatten()
+            Matrix[counter, :, 2] = line.flatten()
             line = return_transition(row, col, action="right", tot_row=3, tot_col=4)
-            T[counter, :, 3] = line.flatten()
+            Matrix[counter, :, 3] = line.flatten()
 
             counter += 1
 
     # Change as you want
-    tot_states = 12
+    total_states = 12
     gamma = 0.2 # Discount factor
     iteration = 0  # Iteration counter
     epsilon = 0.001  # Stopping criteria small value
@@ -40,11 +40,11 @@ def main():
         delta = 0
         u = u1.copy()
         iteration += 1
-        for s in range(tot_states):
+        for s in range(total_states):
             reward = r[s]
-            v = np.zeros((1, tot_states))
+            v = np.zeros((1, total_states))
             v[0, s] = 1.0
-            u1[s] = return_state_utility(v, T, u, reward, gamma)
+            u1[s] = return_state_utility(v, Matrix, u, reward, gamma)
             delta = max(delta, np.abs(u1[s] - u[s]))
 
         print("---------------- ITERATIONS ----------------")
@@ -66,17 +66,8 @@ def main():
             break
 
 
-
-
     enviroment = Enviroment_a_star(u)
     print(enviroment.compute_a_star())
-
-
-
-
-
-
-
 
 if __name__ == "__main__":
     main()
